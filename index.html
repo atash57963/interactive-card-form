@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive card details form</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="wrapper">
+    <section class="visual">
+      <div class="background-split"></div>
+      <div class="cards">
+        <div class="card-3d" id="card-3d" tabindex="0" aria-pressed="false">
+          <div class="card-inner">
+            <div class="card card-front">
+              <div class="card-top">
+                <div class="chip"></div>
+                <div class="circle"></div>
+              </div>
+              <div class="card-number">9591 6489 6389 101E</div>
+              <div class="card-bottom">
+                <div class="card-name">FELICIA LEIRE</div>
+                <div class="card-exp">09/00</div>
+              </div>
+            </div>
+
+            <div class="card card-back">
+              <div class="magnetic"></div>
+              <div class="signature-line">000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-panel">
+      <form class="card-form" novalidate>
+        <h2 class="sr-only">Card details</h2>
+
+        <label class="field">
+          <span class="label-title">CARDHOLDER NAME</span>
+          <input type="text" name="name" placeholder="e.g. Felicia Leire">
+          <small class="error"></small>
+        </label>
+
+        <label class="field">
+          <span class="label-title">CARD NUMBER</span>
+          <input type="text" name="number" placeholder="e.g. 1234 5678 9123 0000" >
+          <small class="error"></small>
+        </label>
+
+        <div class="row">
+          <label class="field small">
+            <span class="label-title">EXP. DATE (MM/YY)</span>
+            <div class="inline">
+              <input type="text" name="mm" placeholder="09" >
+              <input type="text" name="yy" placeholder="26">
+            </div>
+            <small class="error"></small>
+          </label>
+
+          <label class="field small">
+            <span class="label-title">CVC</span>
+            <input type="text" name="cvc" placeholder="e.g. 123">
+            <small class="error"></small>
+          </label>
+        </div>
+
+        <button class="btn-submit" type="submit">Confirm</button>
+      </form>
+
+      <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="https://www.linkedin.com/in/atash-huseynov-004156321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Atash Huseynov</a>.
+      </div>
+    </section>
+  </main>
+  <script src="./scripts.js" defer></script>
+</body>
+</html>
