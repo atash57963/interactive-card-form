@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const cardNumber = document.querySelector('.card-number');
   const cardExp = document.querySelector('.card-exp');
   const cardCvc = document.querySelector('.signature-line');
+  const cardBrand = document.querySelector('.card-brand');
 
   function findErrorEl(input) {
     if (!input) return null;
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateName() {
     const v = (nameInput.value || '').trim();
-    if (cardName) cardName.textContent = v ? v.toUpperCase() : 'JANE APPLESEED';
+    if (cardName) cardName.textContent = v ? v.toUpperCase() : 'XXXXXX XXXXXX';
     if (v && nameError) {
       nameError.textContent = '';
     }
@@ -33,16 +34,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function formatCardNumber(raw) {
     const s = (raw || '').replace(/\s+/g, '');
-    return s.replace(/(.{4})/g, '$1 ').trim() || '0000 0000 0000 0000';
+    if (!s) return '0000 0000 0000 0000';
+    return s.replace(/(.{4})/g, '$1 ').trim();
   }
 
   function updateNumber() {
     const formatted = formatCardNumber(numberInput.value);
-    if (cardNumber) cardNumber.textContent = formatted;
+    if (cardNumber) cardNumber.textContent = formatted || '';
     const digits = numberInput ? (numberInput.value || '').replace(/\s+/g, '') : '';
     if (digits.length === 16) {
       if (numberError) numberError.textContent = '';
       if (numberInput) numberInput.classList.remove('input-error');
+    }
+    if (cardBrand) {
+      let brand = '';
+      let cls = '';
+      if (digits && digits.length > 0) {
+        const first = digits.charAt(0);
+        if (first === '4') { brand = 'VISA'; cls = 'visa'; }
+        else if (first === '5') { brand = 'MASTERCARD'; cls = 'mastercard'; }
+        else if (first === '6') { brand = 'Discover'; cls = 'discover'; }
+        else if (first === '3') { brand = 'American Express'; cls = 'amex'; }
+      }
+      cardBrand.textContent = brand;
+      cardBrand.classList.remove('visa','mastercard','discover','amex','empty');
+      if (!brand) cardBrand.classList.add('empty');
+      else cardBrand.classList.add(cls);
     }
   }
 
@@ -156,7 +173,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (name === 'number') {
       const raw = (this.value || '').replace(/[^0-9]/g, '');
       const limited = raw.slice(0, 16);
-      this.value = formatCardNumber(limited);
+      if (!limited) this.value = '';
+      else this.value = formatCardNumber(limited);
     } else if (name === 'mm') {
       let digits = (this.value || '').replace(/\D/g, '').slice(0, 2);
       if (digits.length === 2) {
